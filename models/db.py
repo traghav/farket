@@ -69,7 +69,7 @@ use_janrain(auth, filename='private/janrain.key')
 #########################################################################
 ## Define your tables below (or better in another model file) for example
 ##
-## >>> db.define_table('mytable',Field('myfield','string'))
+###>>> db.define_table('mytable',Field('myfield','string'))
 ##
 ## Fields can be 'string','text','password','integer','double','boolean'
 ##       'date','time','datetime','blob','upload', 'reference TABLENAME'
@@ -82,6 +82,11 @@ use_janrain(auth, filename='private/janrain.key')
 ## >>> rows=db(db.mytable.myfield=='value').select(db.mytable.ALL)
 ## >>> for row in rows: print row.id, row.myfield
 #########################################################################
+db.define_table('Seller',Field('phonenumber','string' ))
+db.define_table('Buyer',Field('email','string'), Field('name','string'))
+db.define_table('crop',Field('cropName'),'string')
+db.define_table('SupplyList',Field('Price','integer'),Field('date','date'),Field('location','string', Field('seller_id','reference Seller'), Field('crop_id','reference crop') )
+db.define_table('DemandList',Field('MaxPrice','integer'),Field('date','date'), Field('buyer_id','reference Buyer'), Field('crop_id','reference crop') )
 
 ## after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
