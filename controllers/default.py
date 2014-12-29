@@ -19,7 +19,18 @@ def index():
     """
     response.flash = T("Welcome to web2py!")
     return dict(message=T('Hello World'))
+def test():
+    return "some stuff"
+def displayDB():
+    tlist=[]
+    for row in db().select(db.crop.ALL):
+        x = row.cropName + " "
+        tlist.append(x)
+    return dict(tlist)
 
+def insertCrop():
+    db.crop.insert(cropName='Wheat')
+    print "success"
 
 def user():
     """
