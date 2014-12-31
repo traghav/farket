@@ -1,0 +1,5 @@
+def index():
+    code="9836"
+    if code == "9000" 
+        state = 'State: Andhra Pradesh'
+        return state

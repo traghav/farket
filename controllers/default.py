@@ -34,12 +34,7 @@ def displayBuyer():
     Blist=[[],[]]
     count=0
     for row in db().select(db.Buyer.ALL):
-        x = row.email + " "
-        y = row.name + " " 
-        Blist[len(Blist):].append(x)
-        Blist[len(Blist):].append(y)
-        count=count+1
-    return dict(message=Blist)
+        return dict(message=db().select(db.Buyer.ALL))
 @service.run
 def fSellerID(num):
     insertSeller(num)
@@ -57,14 +52,10 @@ def insertSupply(num,p,cr):
     cid=fCropID(cr)
     db.SupplyList.insert(Price=p,tstamp=dt,loc=loca,seller_id=sid,crop_id=cid)
     return "yay"
+##db.SupplyList.seller_id==db.Seller.id & db.SupplyList.crop_id==db.crop.id   
 def displaySlist():
-    return dict(message=db().select(db.SupplyList.ALL))
-
-    
-
-
-
-
+    rows = db((db.SupplyList.crop_id==db.crop.id) & (db.SupplyList.seller_id==db.Seller.id)).select(db.crop.cropName, db.SupplyList.tstamp, db.SupplyList.loc, db.SupplyList.Price,db.Seller.phonenumber)
+    return dict(message=rows)
 def insertCrop():
     db.crop.insert(cropName='Wheat')
     print "success"
