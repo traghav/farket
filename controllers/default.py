@@ -9,6 +9,7 @@
 ## - api is an example of Hypermedia API support and access control
 #########################################################################
 import datetime
+import loc
 def index():
     """
     example action using the internationalization operator T and flash
@@ -21,8 +22,8 @@ def index():
     return dict(message=T('Hello World'))
 
 
-def test():
-    return "some stuff"
+def loFinder(mob):
+    return loc.index(mob)
 def displayCrop():
     clist=[]
     for row in db().select(db.crop.ALL):
@@ -47,7 +48,7 @@ def fCropID(crName):
 @service.run
 def insertSupply(num,p,cr):
     dt = datetime.date.today()
-    loca="India"
+    loca=loFinder
     sid=fSellerID(num)
     cid=fCropID(cr)
     db.SupplyList.insert(Price=p,tstamp=dt,loc=loca,seller_id=sid,crop_id=cid)
