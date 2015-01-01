@@ -5255,6 +5255,6 @@ def findLocation(x):
 	
 	else:
 	
-		state = 'Not Allotted'
+		state = 'India'
 		return state
 

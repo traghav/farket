@@ -46,14 +46,15 @@ def fCropID(crName):
     for row in db(db.crop.cropName==crName).select():
         return row.id
 @service.run
-def insertSupply(num,p,cr):
+def insertSupply(n,p,cr):
     dt = datetime.date.today()
-    loca=loFinder
+    num= n[len(n)-10:]
+    loca=loFinder(num)
     sid=fSellerID(num)
     cid=fCropID(cr)
     db.SupplyList.insert(Price=p,tstamp=dt,loc=loca,seller_id=sid,crop_id=cid)
-    return "yay"
-##db.SupplyList.seller_id==db.Seller.id & db.SupplyList.crop_id==db.crop.id   
+    
+
 def displaySlist():
     rows = db((db.SupplyList.crop_id==db.crop.id) & (db.SupplyList.seller_id==db.Seller.id)).select(db.crop.cropName, db.SupplyList.tstamp, db.SupplyList.loc, db.SupplyList.Price,db.Seller.phonenumber)
     return dict(message=rows)
