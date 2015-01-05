@@ -53,6 +53,8 @@ def insertSupply(n,p,cr):
     sid=fSellerID(num)
     cid=fCropID(cr)
     db.SupplyList.insert(Price=p,tstamp=dt,loc=loca,seller_id=sid,crop_id=cid)
+def insertDemand():
+    pass
     
 
 def displaySlist():
@@ -63,12 +65,10 @@ def insertCrop():
     print "success"
 @service.run    
 def insertBuyer(e,n):
-    db.Buyer.insert(email=e,name=n)
-    return "inserted email "+e+" and name"
+    db.Buyer.update_or_insert(email=e,name=n)
 @service.run
 def insertSeller(phone):
     db.Seller.update_or_insert(phonenumber=phone)
-
     
 def tryone():
     return 'sample'
