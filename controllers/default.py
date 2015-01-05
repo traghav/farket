@@ -53,9 +53,16 @@ def insertSupply(n,p,cr):
     sid=fSellerID(num)
     cid=fCropID(cr)
     db.SupplyList.insert(Price=p,tstamp=dt,loc=loca,seller_id=sid,crop_id=cid)
-def insertDemand():
-    pass
-    
+def fBuyerId(ema,nam):
+    insertBuyer(ema,nam)
+    for row in db(db.Buyer.email==ema).select():
+        return row.id 
+@service.run
+def insertDemand(mp,ema,nam,cr):
+    dt = datetime.date.today()
+    bid=fBuyerId(ema,nam)
+    cid=fCropID(cr)
+    db.DemandList.insert(MaxPrice=mp,tstamp=dt,buyer_id=bid,crop_id=cid)
 
 def displaySlist():
     rows = db((db.SupplyList.crop_id==db.crop.id) & (db.SupplyList.seller_id==db.Seller.id)).select(db.crop.cropName, db.SupplyList.tstamp, db.SupplyList.loc, db.SupplyList.Price,db.Seller.phonenumber)
@@ -65,7 +72,7 @@ def insertCrop():
     print "success"
 @service.run    
 def insertBuyer(e,n):
-    db.Buyer.update_or_insert(email=e,name=n)
+    db.Buyer.update_or_insert(db.Buyer.email==e,email=e,name=n)
 @service.run
 def insertSeller(phone):
     db.Seller.update_or_insert(phonenumber=phone)
