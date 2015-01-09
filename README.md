@@ -3,8 +3,8 @@ Farket- Derived from farmer+market (and a little bit of Big Lebaowski) is an onl
 _______
 ##What plants does it target?
 Currently Farket targets Wheat and Rice as they are the top 2 crops grown in India measured by weight.
-##Are their more features planned?
+##Are there more features planned?
 Yus. Hold tight.
 ##Where can I get **help**?
-If you're interested, leave a message at raghav.toshniwal@gmail.com
+If you're interested, leave a message at farketco@gmail.com
 
