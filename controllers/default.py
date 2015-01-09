@@ -10,6 +10,7 @@
 #########################################################################
 import datetime
 import loc
+import mailz
 def index():
     """
     example action using the internationalization operator T and flash
