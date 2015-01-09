@@ -78,12 +78,28 @@ def insertBuyer(e,n):
 def insertSeller(phone):
     db.Seller.update_or_insert(phonenumber=phone)
 def sendMail():
-    rows = db((db.SupplyList.crop_id==db.DemandList.crop_id) & (db.SupplyList.seller_id==db.Seller.id) & (db.DemandList.buyer_id==db.Buyer.id) &(db.SupplyList.crop_id==db.crop.id) & (db.SupplyList.Price<=db.DemandList.MaxPrice)).select(db.crop.cropName, db.SupplyList.tstamp, db.Buyer.name, db.SupplyList.Price,db.Seller.phonenumber)
-    bl=[]
+    rows = db((db.SupplyList.crop_id==db.DemandList.crop_id) & (db.SupplyList.seller_id==db.Seller.id) & (db.DemandList.buyer_id==db.Buyer.id) &(db.SupplyList.crop_id==db.crop.id) & (db.SupplyList.Price<=db.DemandList.MaxPrice)).select(orderby=db.Buyer.id)
+    first=rows[0].Buyer.email
+    blist=[]
+    info=[]
+    listing=""
+    blist.append(first)
     for row in rows:
-        bl.append(row.Seller.phonenumber)
-    return dict(message=bl)
-    
+        if row.Buyer.email!=first:
+            first=row.Buyer.email
+            blist.append(row.Buyer.email)
+    for x1 in blist:
+        x2 = db((db.SupplyList.crop_id==db.DemandList.crop_id) & (db.SupplyList.seller_id==db.Seller.id) & (db.DemandList.buyer_id==db.Buyer.id) &(db.SupplyList.crop_id==db.crop.id) & (db.SupplyList.Price<=db.DemandList.MaxPrice) &(db.Buyer.email==x1)).select(orderby=db.Buyer.id)    
+        for x3 in x2:
+            tlist=("Crop:"+x3.crop.cropName+"\n"+"Seller Quoted Price:"+str(x3.SupplyList.Price)+"\n"+"Seller Phone:"+str(x3.Seller.phonenumber)+"\n"+"Seller Location:"+x3.SupplyList.loc+"\n"+"Date Posted:"+str(x3.SupplyList.tstamp)+"\n")
+            listing=listing+"\n\n\n"+tlist
+        info.append(listing)
+        listing=""    
+    return info
+
+
+def emailTester():
+    mailz.index("raghav.toshniwal@gmail.com","Subject matter"," Yus uisfejif \n \n \n \n \n \n \n "+"dfij")    
 def tryone():
     return 'sample'
 
