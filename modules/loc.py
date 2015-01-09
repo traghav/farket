@@ -1,4 +1,4 @@
-def findLocation(x):
+def index(x):
 
 	mo= x[len(x)-10:]
 	code=mo[0:4]

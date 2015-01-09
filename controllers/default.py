@@ -77,6 +77,12 @@ def insertBuyer(e,n):
 @service.run
 def insertSeller(phone):
     db.Seller.update_or_insert(phonenumber=phone)
+def sendMail():
+    rows = db((db.SupplyList.crop_id==db.DemandList.crop_id) & (db.SupplyList.seller_id==db.Seller.id) & (db.DemandList.buyer_id==db.Buyer.id) &(db.SupplyList.crop_id==db.crop.id) & (db.SupplyList.Price<=db.DemandList.MaxPrice)).select(db.crop.cropName, db.SupplyList.tstamp, db.Buyer.name, db.SupplyList.Price,db.Seller.phonenumber)
+    bl=[]
+    for row in rows:
+        bl.append(row.Seller.phonenumber)
+    return dict(message=bl)
     
 def tryone():
     return 'sample'
@@ -111,11 +117,6 @@ def download():
     http://..../[app]/default/download/[filename]
     """
     return response.download(request, db)
-
-# def concat(a,b):
-#     db.crop.insert(cropName=a)
-#     print "abra"
-#     return a+b
 def call():
     """
     exposes services. for example:
