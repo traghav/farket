@@ -103,7 +103,7 @@ def prepareMail():
 
 def sendMail():
     content=prepareMail()
-    for x in xrange(0,(len(content)):
+    for x in xrange(0,(len(content))):
         mailz.index(content[0][x],"Farket Report for "+str(datetime.date.today()),content[1][x])    
 def tryone():
     return "Great success!"
