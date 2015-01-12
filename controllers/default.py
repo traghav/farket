@@ -77,11 +77,12 @@ def insertBuyer(e,n):
 @service.run
 def insertSeller(phone):
     db.Seller.update_or_insert(phonenumber=phone)
-def sendMail():
+def prepareMail():
     rows = db((db.SupplyList.crop_id==db.DemandList.crop_id) & (db.SupplyList.seller_id==db.Seller.id) & (db.DemandList.buyer_id==db.Buyer.id) &(db.SupplyList.crop_id==db.crop.id) & (db.SupplyList.Price<=db.DemandList.MaxPrice)).select(orderby=db.Buyer.id)
     first=rows[0].Buyer.email
     blist=[]
     info=[]
+    flist=[[],[]]
     listing=""
     blist.append(first)
     for row in rows:
@@ -95,13 +96,17 @@ def sendMail():
             listing=listing+"\n\n\n"+tlist
         info.append(listing)
         listing=""    
-    return info
+    for x in xrange(0,(len(blist))):
+        flist[0].append(blist[x])
+        flist[1].append(info[x])
+    return flist
 
-
-def emailTester():
-    mailz.index("raghav.toshniwal@gmail.com","Subject matter"," Yus uisfejif \n \n \n \n \n \n \n "+"dfij")    
+def sendMail():
+    content=prepareMail()
+    for x in xrange(0,(len(content)):
+        mailz.index(content[0][x],"Farket Report for "+str(datetime.date.today()),content[1][x])    
 def tryone():
-    return 'sample'
+    return "Great success!"
 
 
 
