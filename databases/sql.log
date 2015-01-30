@@ -110,3 +110,6 @@ CREATE TABLE DemandList(
     crop_id INTEGER REFERENCES crop (id) ON DELETE CASCADE
 );
 success!
+DELETE FROM crop;
+DELETE FROM sqlite_sequence WHERE name='crop';
+success!
