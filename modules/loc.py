@@ -5255,6 +5255,6 @@ def index(x):
 	
 	else:
 	
-		state = 'India'
+		state = 'Unknown Location'
 		return state
 
