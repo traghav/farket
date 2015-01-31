@@ -23,6 +23,10 @@ def index():
     return dict(message=T('Hello World'))
 def purge():
     db.crop.truncate()
+    db.SupplyList.truncate()
+    db.Seller.truncate()
+    db.DemandList.truncate()
+    db.Buyer.truncate()
 
 def prepareMail():
     rows = db((db.SupplyList.crop_id==db.DemandList.crop_id) & (db.SupplyList.seller_id==db.Seller.id) & (db.DemandList.buyer_id==db.Buyer.id) &(db.SupplyList.crop_id==db.crop.id) & (db.SupplyList.Price<=db.DemandList.MaxPrice)).select(orderby=db.Buyer.id)

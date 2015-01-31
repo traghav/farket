@@ -113,3 +113,18 @@ success!
 DELETE FROM crop;
 DELETE FROM sqlite_sequence WHERE name='crop';
 success!
+DELETE FROM crop;
+DELETE FROM sqlite_sequence WHERE name='crop';
+success!
+DELETE FROM SupplyList;
+DELETE FROM sqlite_sequence WHERE name='SupplyList';
+success!
+DELETE FROM Seller;
+DELETE FROM sqlite_sequence WHERE name='Seller';
+success!
+DELETE FROM DemandList;
+DELETE FROM sqlite_sequence WHERE name='DemandList';
+success!
+DELETE FROM Buyer;
+DELETE FROM sqlite_sequence WHERE name='Buyer';
+success!
