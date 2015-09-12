@@ -5,6 +5,6 @@ _______
 Currently Farket targets Wheat and Rice as they are the top 2 crops grown in India measured by weight.
 ##Are there more features planned?
 Yus. Hold tight.
-##Where can I get **help**?
+##Where can I get *help*?
 If you're interested, leave a message at farketco@gmail.com
 
